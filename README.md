@@ -1,16 +1,11 @@
 # Interfacing-Seven-segment-display-with-lpc2148
 
-Name:	
-Roll no 
-Date of experiment:
-
-
-
-Ex. No. :
-Date: 
- 
-
-### Aim: To configure and display 4 character LED seven segment display and write a c code for displaying number 1 to 9 and A to F 
+Name:	M.RAJESHKANNAN
+Roll no :212221230081
+Date of experiment: 11/10/2022
+Ex. No. : 8
+### Aim: 
+To configure and display 4 character LED seven segment display and write a c code for displaying number 1 to 9 and A to F 
 ### Components required: Proteus ISIS professional suite, Kiel μ vision 5 Development environment 
  ![image](https://user-images.githubusercontent.com/36288975/201021692-efa39349-1a3c-4737-aadc-1843b954c78d.png)
 Figure-01 Internal circuit for seven segment MPX4 display
@@ -29,22 +24,22 @@ Below table shows the HEX values and corresponding digit according to LPC2148 pi
 
 
 Sl no 	Hex code 	Output of LCD
-1	0x88	1
-2	0xeb	2
-3	0x4c	3
-4	0x49	4
-5	0x2b	5
-6	0x19	6
-7	0x18	7
-8	0xcb	8
-9	0x8	9
-10	0x9	A
-11	0xa	B
-12	0x38	C
-13	0x9c	D
-14	0x68	E
-15	0x1c 	F
-16	0x1e	0
+1	0x88	          1
+2	0xeb	          2
+3	0x4c	          3
+4	0x49	          4
+5	0x2b	          5
+6	0x19	          6
+7	0x18	          7
+8	0xcb	          8
+9	0x8	          9
+10	0x9	          A
+11	0xa	          B
+12	0x38	          C
+13	0x9c	          D
+14	0x68	          E
+15	0x1c 	          F
+16	0x1e	          0
 
  
 
@@ -52,13 +47,48 @@ Sl no 	Hex code 	Output of LCD
         Figure -3 Circuit diagram of interfacing for LPX4 - CA
 
 ## Kiel - Program 
+```
+#include <LPC214x.h>
+unsigned char dig[]={0x88,0xeb,0x4c,0x49,0x2b,0x19,0x18,0xcb,0x8,0x9,0xa,0x38,0x9c,0x68};
+void delay(unsigned int count)
+{
+    int j=0,i=0;
+    for(j=0;j<count;j++)
+    {
+	for(i=0;i<120;i++);
+	}
+}
+int main(void)
+{
+    unsigned char count=0;
+    unsigned int i=0;
+    IO0DIR|=(1<<11);//Set Digit control lines as Outputs
+    IO0SET=(1<<11);
+    IO0DIR|=0x007F8000;
+    while(1)
+    {
+	count++;
+	if(count==16)count=0;
+	for(i=0;i<800;i++)//change to inc/dec speed of count
+	{
+	  IO0CLR=0x007F8000;
+	  IO0SET=(dig[count]<<15);
+	  delay(500);
+	}
+    }
+}
 
+```
+## Output Screenshots:
+### Before Simulation
+![3](https://user-images.githubusercontent.com/93901857/201055767-c259d5bc-d737-47fd-a025-4f4462530caf.png)
 
-
- 
-
+### After Simulation
+![1](https://user-images.githubusercontent.com/93901857/201055753-4612d8b8-07ba-44f2-ade4-b98ec6ab757c.png)
+![2](https://user-images.githubusercontent.com/93901857/201055762-f52ef534-acd9-4120-a851-75f904bef3bc.png)
+### Circuit Diagram
+![4](https://user-images.githubusercontent.com/93901857/201055775-84d698d7-80d4-4d76-ad5a-48b8187cce2c.png)
 
 ### Result :
 LED seven segment display is interfaced and displayed alpha numeric characters 
 
-##  Output screen shots :
