@@ -1,9 +1,17 @@
 # Interfacing-Seven-segment-display-with-lpc2148
 
 Name:	M.RAJESHKANNAN
+
+
 Roll no :212221230081
+
+
 Date of experiment: 11/10/2022
+
+
 Ex. No. : 8
+
+
 ### Aim: 
 To configure and display 4 character LED seven segment display and write a c code for displaying number 1 to 9 and A to F 
 ### Components required: Proteus ISIS professional suite, Kiel μ vision 5 Development environment 
